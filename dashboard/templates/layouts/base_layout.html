@@ -1,0 +1,40 @@
+{% load static from staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>{% block title %}Dashboard example{% endblock %}</title>
+        <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js"></script>
+        <link href="{% static 'dashboard/css/dashboard.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <script type="text/javascript" src="{% static 'dashboard/js/dashboard.js' %}></script>
+<div style="text-align:right;"><a style="color:black;" href="{% url dashboard_view_gadgets name %}">Add gadgets</a> - <a style="color:black;" href="{% url dashboard_show_layouts name %}">Change Layout</a></div>
+<div style="clear:both;"/>
+{% block layout %}{% endblock %}
+
+    <script type="text/javascript" src="{% static 'dashboard/js/jquery-ui-personalized-1.6rc2.min.js' %}"></script>
+    
+    <script type="text/javascript">
+    function mainGadgetIndividual(id) {
+        var iGadgetInIndividual = 
+    {{% for gadget in dashboard_items %}
+            {{ gadget.make_html_id }} : {
+                // movable: false,
+                // removable: false,
+                // collapsible: false,
+                // editable: false,
+                icon:'{{ gadget.get_icon }}',
+                fields:{{ gadget.get_extra_fields_json }}
+                // colorClasses : ['color-yellow', 'color-red']
+            },{% endfor %}
+        }
+        return iGadgetInIndividual[id];
+    }
+    </script>
+    
+    <script type="text/javascript">
+    iDashboard.init('{% url dashboard_update_ajax name %}','{{ csrf_token }}','{% static "dashboard/css/" %}');
+    </script>
+</body>
+</html>

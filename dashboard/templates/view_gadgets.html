@@ -1,0 +1,12 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<ul>
+{% for gadget in gadgets %}
+<li><a href="{% url dashboard_add_gadget name gadget.name %}">{{ gadget.name }}</a></li>
+{% endfor %}
+</ul>
+</body>
+</html>

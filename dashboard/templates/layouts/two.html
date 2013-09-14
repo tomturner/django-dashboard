@@ -1,0 +1,29 @@
+{% extends "layouts/base_layout.html" %}
+
+{% block title %}Dashboard example - 2 column{% endblock %}
+
+{% block layout %}
+
+<div id="columns" style="display:inline;"> 
+    <ul id="column1" class="column" style="width:50%"> 
+    {% for gadget in dashboard_data.1 %}
+        {{ gadget }}
+    {% endfor %}
+    </ul>
+    <ul id="column2" class="column" style="width:50%">
+    {% for gadget in dashboard_data.2 %}
+        {{ gadget }}
+    {% endfor %}
+    </ul>
+</div>
+
+<div style="clear:both;"/>
+<div id="columns" style="display:inline;"> 
+    <ul id="column3" class="column" style="width:100%"> 
+    {% for gadget in dashboard_data.3 %}
+        {{ gadget }}
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+

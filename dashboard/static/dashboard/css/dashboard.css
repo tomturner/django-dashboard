@@ -1,0 +1,119 @@
+/* Reset */
+body,img,p,h1,h2,h3,h4,h5,h6,ul,ol {margin:0; padding:0; list-style:none; border:none;}
+/* End Reset */
+
+body {font-size:0.8em; font-family:Arial,Verdana,Sans-Serif; background: white}
+a {color:white;}
+
+/* Colors */
+.color-yellow {background:#f2bc00;}
+.color-red    {background:#dd0000;}
+.color-blue   {background:#0000CD;}
+.color-white  {background:#dfdfdf;}
+.color-orange {background:#f66e00;}
+.color-green  {background:#00CD00;}
+.color-purple {background:#903f98;}
+.color-cyan {background: #50EBEC;}
+.color-yellow h3,
+.color-white h3
+
+	{color:#000;}
+.color-red h3,
+.color-blue h3,
+.color-orange h3,
+.color-purple h3,
+.color-green h3
+	{color:#FFF;}
+.color-cyan h3
+	{color:#0000A0;}
+/* End Colors */
+
+/* Head section */
+#head {
+    height: 100px;
+}
+#head h1 {
+    line-height: 100px;
+    color: #FFF;
+    text-align: center;
+    text-indent: -9999em
+}
+/* End Head Section */
+
+/* Columns section */
+#columns .column {
+    float: left;
+    width: 33.3%;
+    /* Min-height: */
+    min-height: 100px;
+    height: auto !important; 
+    height: 100px;
+}
+
+/* Column dividers (background-images) : */
+	
+
+#columns .gadget {
+    margin: 25px 15px 0 15px;
+    padding: 2px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+
+#columns .gadget .gadget-head {
+    color: #000;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+}
+#columns .gadget .gadget-head h3 {
+    padding: 0 5px;
+    float: left;
+}
+#columns .gadget .gadget-content {
+    background: white; /*background-color for gadget*/
+    padding: 0 5px;
+    color: #DDD;
+    -moz-border-radius-bottomleft: 2px;
+    -moz-border-radius-bottomright: 2px;
+    -webkit-border-bottom-left-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    line-height: 1.2em;
+    overflow: hidden;
+}
+#columns .gadget .gadget-content p {
+    padding: 0.8em 0;
+    border-bottom: 1px solid #666;
+}
+#columns .gadget .gadget-content img {
+    float: right;
+    margin: 10px;
+    border: 1px solid #FFF;
+}
+#columns .gadget .gadget-content pre {
+    padding: 0.5em 5px;
+    color: #EEE;
+    font-size: 12px;
+}
+#columns .gadget .gadget-content ul {
+    padding: 5px 0 5px 20px;
+    list-style: disc;
+}
+#columns .gadget .gadget-content ul li {padding: 3px 0;}
+#columns .gadget .gadget-content ul.images {
+    padding: 7px 0 0 0;
+    list-style: none;
+    height: 1%;
+}
+#columns .gadget .gadget-content ul.images li {
+    display: inline;
+    float: left;
+}
+#columns .gadget .gadget-content ul.images img {
+    display: inline;
+    float: left;
+    margin: 0 0 7px 7px;
+}
+/* End Columns section */
+

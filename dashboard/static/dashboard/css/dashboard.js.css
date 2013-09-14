@@ -1,0 +1,84 @@
+/* JS-Enabled CSS */
+
+.gadget-head a.remove  {
+    float: right;
+    display: inline;
+    background: url(/media/img/buttons.gif) no-repeat -24px 0;
+    width: 14px;
+    height: 14px;
+    margin: 8px 4px 8px 0;
+    text-indent: -9999em;
+    outline: none;
+}
+
+.gadget-head a.edit  {
+    float: right;
+    display: inline;
+    background: url(/media/img/buttons.gif) no-repeat;
+    width: 24px;
+    height: 14px;
+    text-indent: -9999em;
+    margin: 8px 4px 8px 4px;
+    outline: none;
+}
+
+.gadget-head img.icon  {
+    position:static;
+    margin-top:-15px;
+    width:32px;
+    margin-right:5px;
+    float:left;
+}
+
+.gadget-head a.collapse  {
+    float: right;
+    display: inline;
+    background: url(/media/img/buttons.gif) no-repeat -52px 0;
+    width: 14px;
+    height: 14px;
+    text-indent: -9999em;
+    margin: 8px 4px 8px 0px;
+    outline: none;
+}
+
+.collapsed .gadget-head a.collapse {background-position:-38px 0;}
+.collapsed .gadget-content {display:none !important;}
+
+.gadget-placeholder { 
+    border: 2px dashed #999;
+    margin: 25px 15px 0 15px;
+}
+
+.edit-box {
+    overflow: hidden;
+    background: #F2F2F2;
+    margin-bottom: 2px;
+    padding: 10px 0;
+}
+
+.edit-box li.item {
+    padding: 10px 0;
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    clear: both;
+}
+
+
+.edit-box label {
+    float: left;
+    width: 30%;
+    color: black;;
+    padding: 0 0 0 10px;
+}
+
+.edit-box ul.colors li {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #EEE;
+    float: left;
+    display: inline;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+}
+
