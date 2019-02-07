@@ -8,8 +8,9 @@ from dashboard.xml_utils import read_value_from_xml_field
 
 
 class Dashboard(models.Model):
-    name = models.CharField(null=True, blank=True, max_length=1024)
-    layout = models.CharField(null=True, blank=True, max_length=1024)
+    name = models.CharField(max_length=1024)
+    slug = models.SlugField()
+    layout = models.TextField(null=True, blank=True)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     def __unicode__(self):
