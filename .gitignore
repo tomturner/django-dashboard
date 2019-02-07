@@ -6,3 +6,4 @@ VERSION
 _build/
 dist/
 .idea/
+example/db.sqlite3
