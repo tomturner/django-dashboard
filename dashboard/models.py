@@ -1,18 +1,16 @@
+import json
+
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
-
-import simplejson as json  # you can get this from http://pypi.python.org/pypi/simplejson/
-from djangodashboard.dashboard.gadgets import open_gadget
-from django_extensions.db.fields import UUIDField
-from xml_utils import read_value_from_xml_field
+from dashboard.gadgets import open_gadget
+from dashboard.xml_utils import read_value_from_xml_field
 
 
 class Dashboard(models.Model):
-    uuid = UUIDField(primary_key=True)
     name = models.CharField(null=True, blank=True, max_length=1024)
     layout = models.CharField(null=True, blank=True, max_length=1024)
-    user = models.ForeignKey(User, null=True, blank=True)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.name
@@ -23,8 +21,7 @@ class Dashboard(models.Model):
 
 
 class DashboardItem(models.Model):
-    uuid = UUIDField(primary_key=True)
-    dashboard = models.ForeignKey(Dashboard, db_column='dashboard_uuid')
+    dashboard = models.ForeignKey(Dashboard, on_delete=models.CASCADE)
     gadget = models.TextField()
     column_number = models.IntegerField()
     position = models.IntegerField()
@@ -40,42 +37,30 @@ class DashboardItem(models.Model):
     def get_colour(self):
         if self.colour is not None:
             return self.colour
-        try:
-            return open_gadget(self.gadget).gadget_info()['colour']
-        except:
-            return ""
+        return open_gadget(self.gadget).gadget_info()['colour']
 
     def get_icon(self):
-        try:
-            return open_gadget(self.gadget).gadget_info()['icon']
-        except:
-            return ""
+        return open_gadget(self.gadget).gadget_info()['icon']
 
     def get_extra_fields(self):
-        try:
-            fields = open_gadget(self.gadget).gadget_info()['fields']
-        except:
-            return ""
-        newFields = {}
+        fields = open_gadget(self.gadget).gadget_info()['fields']
+        new_fields = {}
         for field in fields:
             value = read_value_from_xml_field(field['id'], self.modifier)
             if value != '':
                 field['value'] = value
-            newFields[field['id']] = value
-        return newFields
+            new_fields[field['id']] = value
+        return new_fields
 
     def get_extra_fields_json(self):
-        try:
-            fields = open_gadget(self.gadget).gadget_info()['fields']
-        except:
-            return []
-        newFields = []
+        fields = open_gadget(self.gadget).gadget_info()['fields']
+        new_fields = []
         for field in fields:
             value = read_value_from_xml_field(field['id'], self.modifier)
             if value != '':
                 field['value'] = value
-            newFields.append(field)
-        return mark_safe(json.JSONEncoder().encode(newFields))
+            new_fields.append(field)
+        return mark_safe(json.dumps(new_fields))
 
     def get_collapsed_style(self):
         if self.collapsed:
@@ -84,5 +69,5 @@ class DashboardItem(models.Model):
             return ''
 
     def make_html_id(self):
-        html_id = "id" + self.uuid.replace('-', '')
+        html_id = "id%d" % self.id
         return html_id
