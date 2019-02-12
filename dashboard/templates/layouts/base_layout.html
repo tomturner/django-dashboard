@@ -8,8 +8,8 @@
         <link href="{% static 'dashboard/css/dashboard.css' %}" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <script type="text/javascript" src="{% static 'dashboard/js/dashboard.js' %}></script>
-<div style="text-align:right;"><a style="color:black;" href="{% url dashboard_view_gadgets name %}">Add gadgets</a> - <a style="color:black;" href="{% url dashboard_show_layouts name %}">Change Layout</a></div>
+    <script type="text/javascript" src="{% static 'dashboard/js/dashboard.js' %}"></script>
+<div style="text-align:right;"><a style="color:black;" href="{% url 'dashboard:view_gadgets' dashboard.slug %}">Add gadgets</a> - <a style="color:black;" href="url dashboard_show_layouts name">Change Layout</a></div>
 <div style="clear:both;"/>
 {% block layout %}{% endblock %}
 
@@ -34,7 +34,7 @@
     </script>
     
     <script type="text/javascript">
-    iDashboard.init('{% url dashboard_update_ajax name %}','{{ csrf_token }}','{% static "dashboard/css/" %}');
+    iDashboard.init('url dashboard_update_ajax name','{{ csrf_token }}','{% static "dashboard/css/" %}');
     </script>
 </body>
 </html>

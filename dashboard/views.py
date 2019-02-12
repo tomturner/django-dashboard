@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404, render
 from django.views import View
+from django.views.generic import TemplateView
 
 from dashboard.gadgets import find_gadgets, open_gadget
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,9 +14,9 @@ from django.template.loader import render_to_string
 class ViewDashboard(View):
     def get(self, request, slug):
         try:
-            dashboard = Dashboard.objects.get(alug=alug, user=request.user)
+            dashboard = Dashboard.objects.get(slug=slug, user=request.user)
         except Dashboard.DoesNotExist:
-            dashboard = Dashboard(alug=alug, user=request.user, layout='three')
+            dashboard = Dashboard(slug=slug, user=request.user, layout='three')
             dashboard.save()
         dashboard_data = {}
         column_data = []
@@ -33,7 +34,8 @@ class ViewDashboard(View):
             dashboard_data[column_number] = column_data
 
         return render_to_response('layouts/%s.html' % dashboard.layout,
-                                  {'name': name,
+                                  {'name': dashboard.name,
+                                   'dashboard': dashboard,
                                    'dashboard_data': dashboard_data,
                                    'dashboard_items': dashboard_items})
 #
@@ -81,7 +83,19 @@ class ViewDashboard(View):
 #     w = open_gadget(dashboard_item.gadget)
 #     return w.view(request, dashboard_item)
 #
-#
+
+
+class ViewGadgets(TemplateView):
+    template_name = 'view_gadgets.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ViewGadgets, self).get_context_data(**kwargs)
+        dashboard = get_object_or_404(Dashboard, slug=self.kwargs['slug'])
+        context['dashboard'] = dashboard
+        context['gadgets'] = find_gadgets()
+        return context
+
+
 # # noinspection PyUnusedLocal
 # def view_gadgets(request, name):
 #     return render_to_response('view_gadgets.html', {'name': name, 'gadgets': find_gadgets()})
