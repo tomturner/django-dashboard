@@ -96,11 +96,9 @@ class ViewGadgets(TemplateView):
         return context
 
 
-# # noinspection PyUnusedLocal
-# def view_gadgets(request, name):
-#     return render_to_response('view_gadgets.html', {'name': name, 'gadgets': find_gadgets()})
-#
-#
+class AddGadget(View):
+    def get(self, slug, gadget):
+        pass
 # def add_gadget(request, name, gadget):
 #     try:
 #         dashboard = models.Dashboard.objects.get(name=name, user=request.user)

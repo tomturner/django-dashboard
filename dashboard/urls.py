@@ -15,10 +15,11 @@
 
 
 from django.urls import path
-from dashboard.views import ViewDashboard, ViewGadgets
+from dashboard.views import ViewDashboard, ViewGadgets, AddGadget
 
 app_name = 'dashboard'
 urlpatterns = [
     path('<slug:slug>/', ViewDashboard.as_view(), name='view_dashboard'),
     path('<slug:slug>/view-gadgets/', ViewGadgets.as_view(), name='view_gadgets'),
+    path('<slug:slug>/add/<str:gadget>/', AddGadget.as_view(), name="add_gadget"),
 ]

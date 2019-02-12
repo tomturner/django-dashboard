@@ -8,12 +8,12 @@ def find_gadgets():
                      if not f.startswith('_') and f.endswith('.py')]
     except OSError:
         return []
-    gadgetArray = []
+    gadget_array = []
     for f in file_dict:
-        gadgetArray.append(open_gadget(f).gadget_info())
-    return gadgetArray
+        gadget_array.append(open_gadget(f).gadget_info())
+    return gadget_array
 
 
 def open_gadget(gadget):
-    g = __import__("django-dashboard.dashboard.gadgets." + gadget, globals(), locals(), ["Gadget"])
+    g = __import__("dashboard.gadgets." + gadget, globals(), locals(), ["Gadget"])
     return g.Gadget()
